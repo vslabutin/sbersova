@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Экотуризм и экономия. От отелей «всё включено» к экотропе и национальным паркам</title>
+    <style>
+        /* Общие стили */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+        
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* Шапка */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #0066cc;
+        }
+        
+        .favorites-link {
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .favorites-link:hover {
+            text-decoration: underline;
+        }
+        
+        /* Основное изображение */
+        .hero-image {
+            position: relative;
+            height: 400px;
+            background-image: url('hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-end;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-image {
+                height: 300px;
+            }
+        }
+        
+        .hero-content {
+            background: rgba(0,0,0,0.6);
+            color: white;
+            padding: 20px;
+            width: 100%;
+        }
+        
+        .hero-title {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        
+        .author-link {
+            color: #fff;
+            text-decoration: none;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .author-link:hover::after {
+            content: "Анна Викторовна - автор статей о путешествиях и экотуризме. Другие статьи: 'Отдых на Байкале' - /baikal, 'На поезде к звёздам' - /train";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: #fff;
+            color: #333;
+            padding: 10px;
+            border-radius: 5px;
+            width: 300px;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        
+        .ai-icon {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: #0066cc;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .ai-icon:hover::after {
+            content: "Основные моменты с AI-помощником";
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: #333;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        /* Модальное окно AI */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #0066cc;
+        }
+        
+        .close-modal {
+            float: right;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        /* Основной контент */
+        .article-content {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .article-section {
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #0066cc;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .section-title::after {
+            content: "−";
+            font-size: 28px;
+        }
+        
+        .section-title.collapsed::after {
+            content: "+";
+        }
+        
+        .section-content {
+            transition: all 0.3s ease;
+        }
+        
+        .section-content.collapsed {
+            display: none;
+        }
+        
+        p {
+            margin-bottom: 15px;
+        }
+        
+        strong {
+            font-weight: bold;
+        }
+        
+        ul {
+            margin-bottom: 15px;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+        }
+        
+        /* Кнопка поделиться */
+        .share-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .share-btn {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .share-btn:hover {
+            background-color: #0055aa;
+        }
+        
+        /* Футер */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Страница избранного */
+        .favorites-page {
+            display: none;
+            padding: 30px 0;
+        }
+        
+        .favorites-list {
+            list-style: none;
+        }
+        
+        .favorites-list li {
+            margin-bottom: 15px;
+        }
+        
+        .favorites-list a {
+            color: #0066cc;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        
+        .favorites-list a:hover {
+            text-decoration: underline;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            color: #0066cc;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Шапка -->
+    <header>
+        <div class="container header-content">
+            <div class="logo">СберСоветы</div>
+            <a href="#" class="favorites-link" id="favoritesLink">Избранное</a>
+        </div>
+    </header>
+    
+    <!-- Основное изображение -->
+    <div class="hero-image">
+        <div class="hero-content container">
+            <h1 class="hero-title">Экотуризм и экономия. От отелей «всё включено» к экотропе и национальным паркам</h1>
+            <p class="hero-subtitle">Узнайте свой уровень финансовой грамотности! Пройдите тест за 15 минут</p>
+            <a href="#" class="author-link">Автор: Анна Викторовна</a>
+        </div>
+        <div class="ai-icon" id="aiIcon">AI</div>
+    </div>
+    
+    <!-- Модальное окно AI -->
+    <div class="modal" id="aiModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModal">&times;</span>
+            <h2 class="modal-title">Краткое содержание статьи от AI-помощника</h2>
+            <p>Экотуризм становится всё более популярным как альтернатива традиционному отдыху по системе «всё включено». Автор статьи, Анна Викторова, делится своим опытом перехода от пляжного отдыха к путешествиям по России с рюкзаком. Она отмечает, что привычные курорты перестали приносить новые впечатления, а цены на зарубежные поездки значительно выросли.</p>
+            <p>Экотуризм предлагает диалог с природой, возможность замедлиться и насладиться окружающим миром. Это бережное отношение к природе, отказ от мусора и уважение к животным. Для начинающих экотуристов подойдут такие места, как Лосиный остров или Ясная поляна.</p>
+        </div>
+    </div>
+    
+    <!-- Основной контент -->
+    <div class="container">
+        <div class="article-content">
+            <div class="article-section">
+                <p><strong>Лето. Море. Солнце. Пальмы. Лежак...</strong> Отдых, где всё включено и каждый день напоминает прошедший. Иногда даже самые качественные курорты меркнут перед величественной красотой простого леса. Автор СберСовы Анна Викторовна рассказывает, почему отказалась от привычного пляжного отдыха и теперь путешествует по России с рюкзаком.</p>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Содержание</h2>
+                <div class="section-content">
+                    <ul>
+                        <li>Как отдых мечты превратился в обыденность</li>
+                        <li>Экотуризм – это про диалог с природой</li>
+                        <li>Сколько стоит?</li>
+                        <li>Пять маршрутов для экотуризма в России</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Как отдых мечты превратился в обыденность</h2>
+                <div class="section-content">
+                    <p><strong>Долгое время я проводила отпуск в режиме «уехать на море и ни о чём не беспокоиться».</strong> Предложений от туроператоров хватало: Турция, Египет, Испания - отели с системой «всё включено», шведский стол, лежаки у бассейна. Улететь за границу можно было практически с любым бюджетом. Когда я была начинающим специалистом, то покупала горящую путёвку в турецкие три звезды и отлично проводила время на море, когда заработки возросли - побывала в Европе и в странах Азии.</p>
+                    <p><strong>В последние годы былой энтузиазм немного поутих, прогонённая дорожка перестала казаться привлекательной.</strong> Новые впечатления? Вне зависимости от страны отдых проходит примерно в одном режиме, да и нельзя сказать, что привычный некогда отдых за границей можно считать бюджетным. Сейчас поездка в Турцию на одного обойдётся в сумму от 200 тысяч рублей на неделю.</p>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Экотуризм – это про диалог с природой</h2>
+                <div class="section-content">
+                    <p><strong>Я поняла, что хочу чего-то другого - природы, движения и отсутствия толп людей.</strong> У меня есть друзья, увлечённые туризмом, которые после каждого похода охотно делились впечатлениями.</p>
+                    <p>Я решила попробовать и отправилась с ними в небольшое путешествие. Это не был совсем уж настоящий поход, так как на ночь мы останавливались в гостевом доме. Уикенд на природе позволил полностью перезагрузиться, а физическая нагрузка оказалась вполне посыльной.</p>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Маршруты для экотуризма в Москве и Подмосковье</h2>
+                <div class="section-content">
+                    <ul>
+                        <li><strong>Экотропа в Лосином острове</strong><br>Один из самых доступных вариантов: доехать можно на метро, тропа обустроенная, есть информационные стенды, наблюдательные вышки. Лес настоящий, местами дикий, особенно ближе к окраинам.</li>
+                        <li><strong>Национальный парк «Завидово»</strong><br>Очень красивое место у Волги и Шопи. Есть оборудованные маршруты по лесу, можно увидеть бобров, папель, старинные деревни.</li>
+                        <li><strong>Тропа в Серебряном бору</strong><br>Это почти в пределах города, но атмосфера настоящего прибрежного леса. Особенно красиво осенью.</li>
+                        <li><strong>Заповедник «Журавлиная родина», Таддонский район</strong><br>Очень тихое, усиленное место. Можно увидеть журавлей весной и осенью, пройтись по болотной тропе.</li>
+                        <li><strong>Горки Ленинские – Булатниково</strong><br>Историко-природная тропа с сочетанием полей, леса и культурных объектов. Идётся легко, а виды живописные.</li>
+                        <li><strong>Битцевский лес и его экотропа</strong><br>Если совсем не хочется уезжать далеко. Отличный маршрут для вечерней прогулки после работы.</li>
+                    </ul>
+                    <p>Выбирайте круиз, который заканчивается в вашем городе – односторонние маршруты вроде Ростов – Москва экономит время и открывают новые горизонты.</p>
+                    <p><strong>На самом деле экотуризм - это не обязательно про то, чтобы неделю идти с тяжёлым рюкзаком. Это больше про отношение.</strong></p>
+                    <ul>
+                        <li><strong>Это замедление.</strong> Когда ты не бежишь, а идёшь и смотришь: как распускаются почки, как движется вода, чувствуешь запах хвои.</li>
+                        <li><strong>Это бережность.</strong> Ты не оставляешь мусора, не лезешь в чашу, не пугаешь животных.</li>
+                        <li><strong>Это диалог с природой,</strong> даже если просто сидишь на берегу и пьёшь чай из термоса.</li>
+                    </ul>
+                    <p>Экотропы могут быть обустроены, с настилами, указателями и местами отдыха. А могут быть тропинками по берегу реки или вдоль деревенской улицы. Главное – как к этому относишься. Если вы только начинаете, не стремитесь сразу в горы или на Байкал. Начните с Лосиного острова или Ясной поляны.</p>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Сколько это стоит</h2>
+                <div class="section-content">
+                    <p><strong>Снаряжение:</strong></p>
+                    <ul>
+                        <li>рюкзак (50-60 л) – 8-15 тысяч ₽. Начать можно и с самого простого варианта за пару тысяч рублей, а цены на профессиональные варианты могут уходить и за 20 тысяч;</li>
+                        <li>палатка – 10-25 тысяч ₽;</li>
+                        <li>спальный мешок – 5-12 тысяч ₽;</li>
+                        <li>коврик – 2-6 тысяч ₽;</li>
+                        <li>кухонные принадлежности – 3-7 тысяч ₽.</li>
+                    </ul>
+                    <p><strong>Питание:</strong> продукты на 7 дней – 5-10 тысяч ₽.</p>
+                    <p><strong>Услуги гида:</strong></p>
+                    <ul>
+                        <li>групповые туры – от 20 тысяч ₽ за 3 дня;</li>
+                        <li>индивидуальные гиды – 10-20 тысяч ₽ в день.</li>
+                    </ul>
+                    <p><strong>Проживание:</strong> кемпинг – 500-1000 ₽ за ночь.</p>
+                    <p><strong>Транспорт:</strong></p>
+                    <ul>
+                        <li>билеты на поезд/автобус – 2-10 тысяч ₽;</li>
+                        <li>авиабилеты (по России) – 5-20 тысяч ₽.</li>
+                    </ul>
+                    <p><strong>Конечно, экотуризм требует вложений в снаряжение и организацию. Однако в долгосрочной перспективе он экономичнее традиционного отдыха.</strong> Вот некоторые его преимущества.</p>
+                    <ul>
+                        <li><strong>Гибкость:</strong> вы сами выбираете маршрут, продолжительность и уровень комфорта.</li>
+                        <li><strong>Экономия на проживании:</strong> кемпинг и бюджетные варианты размещения дешевле отелей.</li>
+                        <li><strong>Питание:</strong> приготовление пищи самостоятельно обходится дешевле ресторанов.</li>
+                        <li><strong>Уникальный опыт:</strong> незабываемые впечатления и близость к природе бесценны.</li>
+                    </ul>
+                    <p><strong>Экотуризм не только позволяет сэкономить, но и предлагает более глубокий и насыщенный опыт путешествий.</strong></p>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Пять маршрутов для экотуризма в России</h2>
+                <div class="section-content">
+                    <ol>
+                        <li><strong>Большая Уральская тропа</strong><br>Протяжённость пешеходного маршрута составляет более 2300 км вдоль Уральских гор, он идёт через национальные парки и заповедники. Маршрут понравится опытным туристам, желающим испытать себя и насладиться красотой Урала.</li>
+                        <li><strong>Национальный парк «Зюраткуль», Челябинская область</strong><br>Здесь можно увидеть уникальный природный гейзер, образовавшийся в результате неудачного бурения скважины. Маршрут доступен для туристов с разным уровнем подготовки.</li>
+                        <li><strong>Заповедник «Богдинско-Баскунчакский», Астраханская область</strong><br>Озеро Баскунчак — одно из самых солёных в мире, а гора Большое Богдо — единственная гора в Прикаспийской низменности. Здесь можно наблюдать за добычей соли и познакомиться с уникальной флорой и фауной.</li>
+                        <li><strong>Национальный парк «Плещеево озеро», Ярославская область</strong><br>Парк предлагает экологические тропы, позволяющие познакомиться с природой Центральной России. Подходит для семейного отдыха и начинающих туристов.</li>
+                        <li><strong>Национальный парк «Кисловодский», Ставропольский край</strong><br>Здесь создана уникальная "бесоногая" тропа, где посетители могут пройтись по различным природным покрытиям, стимулируя биологически активные точки на стопах. Отличный вариант для тех, кто ищет необычные ощущения.</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="article-section">
+                <h2 class="section-title">Заключение</h2>
+                <div class="section-content">
+                    <p><strong>Сегодня экотуризм становится всё популярнее среди путешественников, стремящихся совмещать отдых с заботой о природе и познанием уникальных экосистем нашей планеты.</strong></p>
+                </div>
+            </div>
+            
+            <div class="share-section">
+                <button class="share-btn">Поделиться статьей</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Футер -->
+    <footer>
+        <div class="container footer-content">
+            <p>© 2024 СберСоветы. Все права защищены.</p>
+        </div>
+    </footer>
+    
+    <!-- Страница избранного -->
+    <div class="container favorites-page" id="favoritesPage">
+        <h1>Избранные статьи</h1>
+        <ul class="favorites-list">
+            <li><a href="#">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></li>
+            <li><a href="#">На поезде к звёздам. 5 модных трендов в туризме</a></li>
+            <li><a href="#">Отдых без заморочек: как путешествовать без стресса</a></li>
+            <li><a href="#">Горные маршруты для начинающих туристов</a></li>
+            <li><a href="#">Как сэкономить на путешествиях: 10 проверенных способов</a></li>
+        </ul>
+        <a href="#" class="back-btn" id="backBtn">Вернуться к статье</a>
+    </div>
+    
+    <script>
+        // Обработка сворачивания/разворачивания разделов
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.addEventListener('click', () => {
+                const content = title.nextElementSibling;
+                title.classList.toggle('collapsed');
+                content.classList.toggle('collapsed');
+            });
+        });
+        
+        // Модальное окно AI
+        const aiIcon = document.getElementById('aiIcon');
+        const aiModal = document.getElementById('aiModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        aiIcon.addEventListener('click', () => {
+            aiModal.style.display = 'flex';
+        });
+        
+        closeModal.addEventListener('click', () => {
+            aiModal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target === aiModal) {
+                aiModal.style.display = 'none';
+            }
+        });
+        
+        // Переключение между статьей и избранным
+        const favoritesLink = document.getElementById('favoritesLink');
+        const favoritesPage = document.getElementById('favoritesPage');
+        const backBtn = document.getElementById('backBtn');
+        const articleContent = document.querySelector('.article-content');
+        const footer = document.querySelector('footer');
+        
+        favoritesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            articleContent.style.display = 'none';
+            footer.style.display = 'none';
+            favoritesPage.style.display = 'block';
+        });
+        
+        backBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            articleContent.style.display = 'block';
+            footer.style.display = 'block';
+            favoritesPage.style.display = 'none';
+        });
+        
+        // Кнопка поделиться
+        const shareBtn = document.querySelector('.share-btn');
+        shareBtn.addEventListener('click', () => {
+            alert('Ссылка на статью скопирована в буфер обмена!');
+            // Здесь можно добавить реальную функциональность для шаринга
+        });
+    </script>
+</body>
+</html>
