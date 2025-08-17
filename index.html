@@ -30,6 +30,60 @@ a:hover {
     color: white !important;
 }
 
+   /* Стили для интересного факта */
+    .interesting-fact {
+        width: 50%;
+        margin: 30px auto;
+        padding: 15px 0;
+        position: relative;
+    }
+    
+    .interesting-fact::before,
+    .interesting-fact::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background-color: #e0e0e0;
+    }
+    
+    .interesting-fact::before {
+        top: 0;
+    }
+    
+    .interesting-fact::after {
+        bottom: 0;
+    }
+    
+    .fact-icon {
+        float: left;
+        font-size: 24px;
+        margin-right: 15px;
+        color: #0066cc;
+    }
+    
+    .fact-content {
+        overflow: hidden;
+    }
+    
+    .fact-title {
+        font-weight: bold;
+        color: #0066cc;
+        margin-bottom: 8px;
+    }
+    
+    .fact-text {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    @media (max-width: 768px) {
+        .interesting-fact {
+            width: 80%;
+        }
+    }
+
         /* Общие стили */
         * {
             margin: 0;
@@ -755,6 +809,17 @@ a:hover {
                 
                 <p><strong>Экотуризм не только позволяет сэкономить, но и предлагает более глубокий и насыщенный опыт путешествий.</strong></p>
             </div>
+
+<!-- Интересный факт -->
+<div class="interesting-fact">
+    <div class="fact-icon">💡</div>
+    <div class="fact-content">
+        <div class="fact-title">Интересный факт</div>
+        <div class="fact-text">
+            Первый национальный парк в мире появился в США. Это Йеллоустонский национальный парк, основанный в 1872 году. Он стал символом начала движения по охране природы и вдохновил создание национальных парков во многих странах мира, включая Россию, где первый национальный парк («Сочинский») был основан лишь спустя почти столетие — в 1983 году.
+        </div>
+    </div>
+</div>
 
             <!-- Пять маршрутов для экотуризма в России -->
             <div class="framed-section" id="russiaRoutesSection">
