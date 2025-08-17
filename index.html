@@ -687,7 +687,87 @@ a:hover {
         width: 14px;
         height: 14px;
     }
+
+    /* Стили для компактного раздела */
+    .recommended-section {
+        margin: 30px 0;
+    }
+    
+    .recommended-title {
+        font-size: 18px;
+        color: #0066cc;
+        margin-bottom: 15px;
+        padding-left: 10px;
+    }
+    
+    .recommended-scroll-container {
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .recommended-articles {
+        display: flex;
+        gap: 12px;
+        padding: 0 10px;
+        width: max-content;
+    }
+    
+    .recommended-article {
+        min-width: 200px;
+        max-width: 200px;
+        border: 1px solid #e0e0e0;
+        border-radius: 6px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+    
+    .recommended-article:hover {
+        transform: translateY(-3px);
+    }
+    
+    .recommended-image {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+    }
+    
+    .recommended-content {
+        padding: 10px;
+    }
+    
+    .recommended-article-date {
+        font-size: 11px;
+        color: #999;
+        margin-bottom: 6px;
+    }
+    
+    .recommended-article-title {
+        font-size: 14px;
+        line-height: 1.3;
+        margin: 0;
+    }
+    
+    .recommended-article-link {
+        color: #1a5a96;
+        text-decoration: none;
+    }
+    
+    .recommended-article-link:hover {
+        text-decoration: underline;
+    }
+    
+    /* Стилизация скроллбара */
+    .recommended-scroll-container::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .recommended-scroll-container::-webkit-scrollbar-thumb {
+        background: #ccc;
+        border-radius: 2px;
+    }
 </style>
+
 </head>
 <body>
     <!-- Шапка -->
@@ -971,36 +1051,69 @@ a:hover {
             </div>
         </div>
 
-        <!-- Рекомендуемые статьи -->
-        <div class="recommended-section">
-            <h3 class="recommended-title">Что еще почитать</h3>
-            <div class="recommended-articles">
-                <div class="recommended-article">
-                    <img src="baykal.webp" alt="Отдых на Байкале" class="recommended-image">
-                    <div class="recommended-content">
-                        <div class="recommended-article-date">06.12.2023</div>
-                        <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/otdykh-na-baykale-kak-dobratsya-gde-ostanovitsya-i-chto-posmotret" target="_blank" class="recommended-article-link">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></h4>
-                    </div>
+<!-- Раздел "Что еще почитать" с компактным дизайном -->
+<div class="recommended-section">
+    <h3 class="recommended-title">Что еще почитать</h3>
+    <div class="recommended-scroll-container">
+        <div class="recommended-articles">
+            <div class="recommended-article">
+                <img src="baykal.webp" alt="Отдых на Байкале" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">06.12.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/otdykh-na-baykale-kak-dobratsya-gde-ostanovitsya-i-chto-posmotret" target="_blank" class="recommended-article-link">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></h4>
                 </div>
+            </div>
 
-                <div class="recommended-article">
-                    <img src="star.webp" alt="Поезд" class="recommended-image">
-                    <div class="recommended-content">
-                        <div class="recommended-article-date">18.10.2023</div>
-                        <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/otdykh-na-baykale-kak-dobratsya-gde-ostanovitsya-i-chto-posmotret" target="_blank" class="recommended-article-link">На поезде к звёздам. 5 модных трендов в туризме</a></h4>
-                    </div>
+            <div class="recommended-article">
+                <img src="star.webp" alt="Поезд" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">18.10.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/na-poyezde-k-zvozdam-5-modnykh-trendov-v-turizme" target="_blank" class="recommended-article-link">На поезде к звёздам. 5 модных трендов в туризме</a></h4>
                 </div>
+            </div>
 
-                <div class="recommended-article">
-                    <img src="stress.webp" alt="Отдых без стресса" class="recommended-image">
-                    <div class="recommended-content">
-                        <div class="recommended-article-date">19.07.2023</div>
-                        <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/otdykh-bez-zamorochek-kakie-situacii-nuzhno-predusmotret-v-puteshestviyakh-po-rossii" target="_blank" class="recommended-article-link">Отдых без заморочек: какие ситуации нужно предусмотреть в путешествиях по России</a></h4>
-                    </div>
+            <div class="recommended-article">
+                <img src="stress.webp" alt="Отдых без стресса" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">19.07.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/otdykh-bez-zamorochek-kakie-situacii-nuzhno-predusmotret-v-puteshestviyakh-po-rossii" target="_blank" class="recommended-article-link">Отдых без заморочек: какие ситуации нужно предусмотреть в путешествиях по России</a></h4>
+                </div>
+            </div>
+
+            <div class="recommended-article">
+                <img src="dolgi.webp" alt="Отдых без стресса" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">19.07.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/kak-proverit-dolgi-pered-vyezdom-za-granicu-instrukciya-sbersovy" target="_blank" class="recommended-article-link">Как проверить долги перед выездом за границу</a></h4>
+                </div>
+            </div>
+
+            <div class="recommended-article">
+                <img src="bezp.webp" alt="Отдых без стресса" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">19.07.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/puteshestviya-bez-problem" target="_blank" class="recommended-article-link">Путешествия без проблем</a></h4>
+                </div>
+            </div>
+
+            <div class="recommended-article">
+                <img src="space.webp" alt="Отдых без стресса" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">19.07.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/skolko-stoit-polyot-v-kosmos-i-zachem-millionery-letyat-k-zvyozdam" target="_blank" class="recommended-article-link">Сколько стоит полёт в космос, и зачем миллионеры летят к звёздам</a></h4>
+                </div>
+            </div>
+
+            <div class="recommended-article">
+                <img src="kostroma.webp" alt="Отдых без стресса" class="recommended-image">
+                <div class="recommended-content">
+                    <div class="recommended-article-date">19.07.2023</div>
+                    <h4 class="recommended-article-title"><a href="https://sbersova.ru/sections/lifestyle/kostroma-kolybel-romanovykh" target="_blank" class="recommended-article-link">Кострома - колыбель Романовых</a></h4>
                 </div>
             </div>
         </div>
     </div>
+</div>
 
     <!-- Футер -->
     <footer>
