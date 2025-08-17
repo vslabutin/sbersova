@@ -17,6 +17,8 @@
             line-height: 1.6;
             color: #333;
             background-color: #f9f9f9;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         .container {
@@ -93,6 +95,8 @@
         /* Основное изображение */
         .hero-image-container {
             margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
         }
 
         .hero-image {
@@ -117,53 +121,16 @@
             padding: 10px 0;
             border-top: 1px solid #e0e0e0;
             border-bottom: 1px solid #e0e0e0;
-            position: relative;
+            display: inline-block;
         }
 
         .author-link {
             color: #0066cc;
             text-decoration: none;
-            position: relative;
-            display: inline-block;
+            cursor: pointer;
         }
 
-        .author-tooltip {
-            display: none;
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            background: #fff;
-            color: #333;
-            padding: 15px;
-            border-radius: 5px;
-            width: 300px;
-            z-index: 10;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-        }
-
-        .author-link:hover .author-tooltip {
-            display: block;
-        }
-
-        .author-articles {
-            list-style: none;
-            margin-top: 10px;
-        }
-
-        .author-articles li {
-            margin-bottom: 8px;
-        }
-
-        .author-articles a {
-            color: #0066cc;
-            text-decoration: none;
-        }
-
-        .author-articles a:hover {
-            text-decoration: underline;
-        }
-
-        /* Модальное окно AI */
+        /* Модальное окно */
         .modal {
             display: none;
             position: fixed;
@@ -210,14 +177,14 @@
 
         .article-section {
             margin-bottom: 30px;
-            scroll-margin-top: 100px; /* Добавлено для якорных ссылок */
+            scroll-margin-top: 100px;
         }
 
         .section-title {
             font-size: 24px;
             margin-bottom: 15px;
             color: #0066cc;
-            scroll-margin-top: 100px; /* Добавлено для якорных ссылок */
+            scroll-margin-top: 100px;
         }
 
         /* Стили для блоков с рамкой */
@@ -328,6 +295,7 @@
 
         .share-buttons {
             display: flex;
+            gap: 10px;
         }
 
         .share-btn {
@@ -337,11 +305,13 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            margin-right: 10px;
             color: white;
             text-decoration: none;
             font-size: 18px;
             transition: transform 0.2s;
+            background-size: 24px;
+            background-position: center;
+            background-repeat: no-repeat;
         }
 
         .share-btn:hover {
@@ -350,10 +320,12 @@
 
         .telegram {
             background-color: #0088cc;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9.78 18.65l.28-4.23 7.68-6.92c.34-.31-.07-.46-.52-.19L7.74 13.3 3.64 12c-.88-.25-.89-.86.2-1.3l15.97-6.16c.73-.33 1.43.18 1.15 1.3l-2.72 12.81c-.19.91-.74 1.13-1.5.71L12.6 16.3l-1.99 1.93c-.23.23-.42.42-.83.42z'/%3E%3C/svg%3E");
         }
 
         .whatsapp {
             background-color: #25D366;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z'/%3E%3C/svg%3E");
         }
 
         /* Оценка статьи */
@@ -569,59 +541,6 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
-        /* Страница избранного */
-        .favorites-page {
-            display: none;
-            padding: 30px 0;
-        }
-
-        .favorites-hero-image {
-            width: 100%;
-            max-height: 300px;
-            object-fit: cover;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .favorites-list {
-            list-style: none;
-            padding: 0 20px;
-        }
-
-        .favorites-list li {
-            margin-bottom: 15px;
-            padding-bottom: 15px;
-            border-bottom: 1px solid #e0e0e0;
-        }
-
-        .favorites-list a {
-            color: #1a5a96;
-            text-decoration: none;
-            font-size: 18px;
-            display: block;
-            padding: 10px 0;
-        }
-
-        .favorites-list a:hover {
-            text-decoration: underline;
-        }
-
-        .back-btn {
-            display: inline-block;
-            margin-top: 20px;
-            color: #0066cc;
-            text-decoration: none;
-            font-weight: bold;
-            padding: 10px 20px;
-            border: 1px solid #0066cc;
-            border-radius: 5px;
-            margin-left: 20px;
-        }
-
-        .back-btn:hover {
-            background-color: #f0f7ff;
-        }
     </style>
 </head>
 <body>
@@ -636,33 +555,54 @@
         </div>
     </header>
 
-    <!-- Основное изображение -->
     <div class="container hero-image-container">
         <img src="main.png" alt="Экотуризм" class="hero-image">
+        
         <div class="author-block">
-            <a href="#" class="author-link">
+            <a href="#" class="author-link" id="authorLink">
                 Автор: Анна Викторова
-                <div class="author-tooltip">
-                    Анна Викторова - автор статей о путешествиях и экотуризме
-                    <ul class="author-articles">
-                        <li><a href="/baikal">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></li>
-                        <li><a href="/train">На поезде к звёздам. 5 модных трендов в туризме</a></li>
-                        <li><a href="/stress-free">Отдых без заморочек: как путешествовать без стресса</a></li>
-                    </ul>
-                </div>
             </a>
         </div>
-        <h1 class="hero-title">Экотуризм и экономия. От отелей «всё включено» к экотропе и национальным паркам</h1>
-        <p class="hero-subtitle">Узнайте свой уровень финансовой грамотности! Пройдите тест за 15 минут</p>
     </div>
 
     <!-- Модальное окно AI -->
     <div class="modal" id="aiModal">
         <div class="modal-content">
-            <span class="close-modal" id="closeModal">&times;</span>
+            <span class="close-modal" id="closeAiModal">&times;</span>
             <h2 class="modal-title">Краткое содержание статьи от AI-помощника</h2>
             <p>Экотуризм становится всё более популярным как альтернатива традиционному отдыху по системе «всё включено». Автор статьи, Анна Викторова, делится своим опытом перехода от пляжного отдыха к путешествиям по России с рюкзаком. Она отмечает, что привычные курорты перестали приносить новые впечатления, а цены на зарубежные поездки значительно выросли.</p>
             <p>Экотуризм предлагает диалог с природой, возможность замедлиться и насладиться окружающим миром. Это бережное отношение к природе, отказ от мусора и уважение к животным. Для начинающих экотуристов подойдут такие места, как Лосиный остров или Ясная поляна.</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно автора -->
+    <div class="modal" id="authorModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeAuthorModal">&times;</span>
+            <h2 class="modal-title">Об авторе</h2>
+            <p>Анна Викторова - автор статей о путешествиях и экотуризме. Специализируется на написании материалов о бюджетных и экологичных способах путешествий по России и зарубежом.</p>
+            <h3 style="margin-top: 20px;">Другие статьи автора:</h3>
+            <ul>
+                <li><a href="/baikal">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></li>
+                <li><a href="/train">На поезде к звёздам. 5 модных трендов в туризме</a></li>
+                <li><a href="/stress-free">Отдых без заморочек: как путешествовать без стресса</a></li>
+                <li><a href="/mountains">Горные маршруты для начинающих туристов</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Модальное окно избранного -->
+    <div class="modal" id="favoritesModal">
+        <div class="modal-content">
+            <span class="close-modal" id="closeFavoritesModal">&times;</span>
+            <h2 class="modal-title">Избранные статьи</h2>
+            <ul>
+                <li><a href="#">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></li>
+                <li><a href="#">На поезде к звёздам. 5 модных трендов в туризме</a></li>
+                <li><a href="#">Отдых без заморочек: как путешествовать без стресса</a></li>
+                <li><a href="#">Горные маршруты для начинающих туристов</a></li>
+                <li><a href="#">Как сэкономить на путешествиях: 10 проверенных способов</a></li>
+            </ul>
         </div>
     </div>
 
@@ -682,9 +622,9 @@
                     <ul class="toc-list">
                         <li><a href="#section1-title">Как отдых мечты превратился в обыденность</a></li>
                         <li><a href="#section2-title">Экотуризм – это про диалог с природой</a></li>
-                        <li><a href="#section3-title">Маршруты для экотуризма в Москве и Подмосковье</a></li>
-                        <li><a href="#section4-title">Сколько это стоит</a></li>
-                        <li><a href="#section5-title">Пять маршрутов для экотуризма в России</a></li>
+                        <li><a href="#routesHeader">Маршруты для экотуризма в Москве и Подмосковье</a></li>
+                        <li><a href="#costHeader">Сколько это стоит</a></li>
+                        <li><a href="#russiaRoutesHeader">Пять маршрутов для экотуризма в России</a></li>
                     </ul>
                 </div>
             </div>
@@ -693,10 +633,10 @@
                 <h2 class="section-title">Как отдых мечты превратился в обыденность</h2>
                 <div class="clearfix">
                     <div class="article-image-container">
-                        <img src="article-image1.jpg" alt="Пляжный отдых" class="article-image">
+                        <img src="beach.jpg" alt="Пляжный отдых" class="article-image">
                     </div>
                     <p><strong>Долгое время я проводила отпуск в режиме «уехать на море и ни о чём не беспокоиться».</strong> Предложений от туроператоров хватало: Турция, Египет, Испания - отели с системой «всё включено», шведский стол, лежаки у бассейна. Улететь за границу можно было практически с любым бюджетом. Когда я была начинающим специалистом, то покупала горящую путёвку в турецкие три звезды и отлично проводила время на море, когда заработки возросли - побывала в Европе и в странах Азии.</p>
-                    <p><strong>В последние годы былой энтузиазм немного поутих, прогонённая дорожка перестала казаться привлекательной.</strong> Новые впечатления? Вне зависимости от страны отдых проходит примерно в одном режиме, да и нельзя сказать, что привычный некогда отдых за границей можно считать бюджетным. Сейчас поездка в Турцию на одного обойдётся в сумму от 200 тысяч рублей на неделю.</p>
+                    <p><strong>В последние годы былой энтузиазм немного поутих, прогоннная дорожка перестала казаться привлекательной.</strong> Новые впечатления? Вне зависимости от страны отдых проходит примерно в одном режиме, да и нельзя сказать, что привычный некогда отдых за границей можно считать бюджетным. Сейчас поездка в Турцию на одного обойдётся в сумму от 200 тысяч рублей на неделю.</p>
                 </div>
             </div>
 
@@ -712,7 +652,7 @@
             </div>
 
             <!-- Маршруты в Москве и Подмосковье -->
-            <div class="framed-section">
+            <div class="framed-section" id="routesSection">
                 <div class="framed-header collapsed" id="routesHeader">
                     Маршруты для экотуризма в Москве и Подмосковье
                 </div>
@@ -745,7 +685,7 @@
             </div>
 
             <!-- Сколько это стоит -->
-            <div class="framed-section">
+            <div class="framed-section" id="costSection">
                 <div class="framed-header collapsed" id="costHeader">
                     Сколько это стоит
                 </div>
@@ -792,7 +732,7 @@
             </div>
 
             <!-- Пять маршрутов для экотуризма в России -->
-            <div class="framed-section">
+            <div class="framed-section" id="russiaRoutesSection">
                 <div class="framed-header collapsed" id="russiaRoutesHeader">
                     Пять маршрутов для экотуризма в России
                 </div>
@@ -867,8 +807,8 @@
             <div class="share-section">
                 <span class="share-text">Поделиться:</span>
                 <div class="share-buttons">
-                    <a href="https://t.me/share/url?url=example.com&text=Экотуризм и экономия" class="share-btn telegram" target="_blank">📨</a>
-                    <a href="https://wa.me/?text=Читайте интересную статью про экотуризм: example.com" class="share-btn whatsapp" target="_blank">📱</a>
+                    <a href="https://t.me/share/url?url=example.com&text=Экотуризм и экономия" class="share-btn telegram" target="_blank"></a>
+                    <a href="https://wa.me/?text=Читайте интересную статью про экотуризм: example.com" class="share-btn whatsapp" target="_blank"></a>
                 </div>
             </div>
         </div>
@@ -911,20 +851,6 @@
         </div>
     </footer>
 
-    <!-- Страница избранного -->
-    <div class="container favorites-page" id="favoritesPage">
-        <img src="main.png" alt="Избранное" class="favorites-hero-image">
-        <h1>Избранные статьи</h1>
-        <ul class="favorites-list">
-            <li><a href="#">Отдых на Байкале: как добраться, где остановиться и что посмотреть</a></li>
-            <li><a href="#">На поезде к звёздам. 5 модных трендов в туризме</a></li>
-            <li><a href="#">Отдых без заморочек: как путешествовать без стресса</a></li>
-            <li><a href="#">Горные маршруты для начинающих туристов</a></li>
-            <li><a href="#">Как сэкономить на путешествиях: 10 проверенных способов</a></li>
-        </ul>
-        <a href="#" class="back-btn" id="backBtn">Вернуться к статье</a>
-    </div>
-
     <script>
         // Обработка сворачивания/разворачивания блоков с рамкой
         const framedHeaders = [
@@ -946,46 +872,56 @@
 
         // Модальное окно AI
         const headerAiIcon = document.getElementById('headerAiIcon');
-        const aiIcon = document.getElementById('aiIcon');
         const aiModal = document.getElementById('aiModal');
-        const closeModal = document.getElementById('closeModal');
+        const closeAiModal = document.getElementById('closeAiModal');
 
         headerAiIcon.addEventListener('click', () => {
             aiModal.style.display = 'flex';
         });
 
-        closeModal.addEventListener('click', () => {
+        closeAiModal.addEventListener('click', () => {
             aiModal.style.display = 'none';
         });
 
+        // Модальное окно автора
+        const authorLink = document.getElementById('authorLink');
+        const authorModal = document.getElementById('authorModal');
+        const closeAuthorModal = document.getElementById('closeAuthorModal');
+
+        authorLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            authorModal.style.display = 'flex';
+        });
+
+        closeAuthorModal.addEventListener('click', () => {
+            authorModal.style.display = 'none';
+        });
+
+        // Модальное окно избранного
+        const favoritesLink = document.getElementById('favoritesLink');
+        const favoritesModal = document.getElementById('favoritesModal');
+        const closeFavoritesModal = document.getElementById('closeFavoritesModal');
+
+        favoritesLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            favoritesModal.style.display = 'flex';
+        });
+
+        closeFavoritesModal.addEventListener('click', () => {
+            favoritesModal.style.display = 'none';
+        });
+
+        // Закрытие модальных окон при клике вне контента
         window.addEventListener('click', (e) => {
             if (e.target === aiModal) {
                 aiModal.style.display = 'none';
             }
-        });
-
-        // Переключение между статьей и избранным
-        const favoritesLink = document.getElementById('favoritesLink');
-        const favoritesPage = document.getElementById('favoritesPage');
-        const backBtn = document.getElementById('backBtn');
-        const articleContent = document.querySelector('.article-content');
-        const footer = document.querySelector('footer');
-        const recommendedSection = document.querySelector('.recommended-section');
-
-        favoritesLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            articleContent.style.display = 'none';
-            footer.style.display = 'block';
-            recommendedSection.style.display = 'none';
-            favoritesPage.style.display = 'block';
-        });
-
-        backBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            articleContent.style.display = 'block';
-            footer.style.display = 'block';
-            recommendedSection.style.display = 'block';
-            favoritesPage.style.display = 'none';
+            if (e.target === authorModal) {
+                authorModal.style.display = 'none';
+            }
+            if (e.target === favoritesModal) {
+                favoritesModal.style.display = 'none';
+            }
         });
 
         // Оценка статьи
@@ -1022,6 +958,17 @@
                 const targetElement = document.querySelector(targetId);
                 
                 if (targetElement) {
+                    // Если это заголовок свернутого блока, разворачиваем его
+                    if (targetId === '#routesHeader' || targetId === '#costHeader' || targetId === '#russiaRoutesHeader') {
+                        const header = document.querySelector(targetId);
+                        const content = document.querySelector(targetId.replace('Header', 'Content'));
+                        
+                        if (header.classList.contains('collapsed')) {
+                            header.classList.remove('collapsed');
+                            content.classList.remove('collapsed');
+                        }
+                    }
+                    
                     window.scrollTo({
                         top: targetElement.offsetTop - 100,
                         behavior: 'smooth'
